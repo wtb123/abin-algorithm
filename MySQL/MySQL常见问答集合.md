@@ -20,8 +20,27 @@
 
 [参考资料：B树和B+树的区别](https://blog.csdn.net/login_sonata/article/details/75268075?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-75268075-blog-114588507.pc_relevant_3mothn_strategy_recovery&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-75268075-blog-114588507.pc_relevant_3mothn_strategy_recovery&utm_relevant_index=1)
 
-## 一、binlog 和 redo 的区别
+## 二、binlog 和 redo 的区别
 1. binlog 属于数据库 Server 层的日志，redo log 是 InnoDB 引擎特有的
 2. binlog 是逻辑日志，记录的是每次操作的 SQL，redo log 是物理日志，记录的是数据页的更新
-3. binlog 是追加写日志， redo log是循环写日志，空间固定会用完
+3. binlog 是追加写日志，记录的是全量日志， redo log是循环写日志，空间固定会用完，只记录未刷盘的日志
+4. binlog 是用来记录全量日志的，数据 crash 时候内存数据丢失了，binlog 无法判断日志内容是否已经写到磁盘了，因为是攒一波才会去更新磁盘的；
+但是 redo log 不一样，是循环写，刷盘的数据都已经不在 redo log记录里面了，redo log里面都是没刷盘的数据，把这些没刷盘的数据恢复的过程也就是就恢复了crash；
+[binlog和redolog在崩溃恢复上的作用](https://www.cnblogs.com/sfzlstudy/p/15991697.html)
+
+## 三、聚簇索引和非聚簇索引的区别是什么?
+
+## 四、SQL语句如何优化?
+
+## 五、数据库隔离级别有哪些?
+1.读未提交：脏读
+2.读已提交：不可重复读
+3.可重复读：幻读
+4.序列化：效率很低
+
+## 六、事务是怎么实现的？
+
+## 七、事务的隔离级别是怎么实现的？
+
+
 
